@@ -6,5 +6,12 @@ go:
  - release
  - tip
 
+install: 
+ - go get code.google.com/p/go.tools/cmd/cover
+ - go get github.com/mattn/goveralls
+
 script:
- - go test -v ./...
+ - go test -v -covermode=count -coverprofile=coverage.out
+ - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+
+secure: "EyZ7xYRMXp3aeC2izF39PFQtODr32/jyHMA4tTWYacvtx08D0OerBT0fk8TTTLeW8k3uLim0DVh6I5I+6sYXGlM2lGhg2abO/VK2+TumMqDX6jJA2Cg9ps2ppXXME1EuuaU8bZA/XA29JWczoz3COgM/nWl1TKbKZyMorlH2hhioXxEzRBvFrvINQXZdwO7bG2r79QLwHUzTv+fRBXqCyeZaa/xivfPr+KpBjUkr6VRgTexBOXkd70lmvGSR+YW76b5kzRbEV58I/NBJ3jEPp8GSMRZqSgZ1RWqixtCyQxc9/t6Ob7qUFosmzZusZGrJSWoCdZWd1XisStLy6zyLs+vSWdbA+QyRrtr/PuDmWvNNX1kRFwfYrfMFDoI0E0L/rQPs/ABcJUNTiG/jToHgDO+4Z+c3Kj+gyJJIsF7bFg78ltaeggvsizcK3Kb6BdjUcWwO43SJV776vlRIe1tZltAJPXFZ/mG5Dv40JCXQa5Chx6Y9ajxXqQiUZzLAbcjaclwm+Y30Z7JicM/7WgcE/ER/si2QT7C4OXmnFXWt08r10J6i7qBOnqH+Ue/hd5YrDkH/gQVrjEDHJu1JCBPEffRiQy2ZIlLY9Ivg0DFmkzNV4KR2twSPkPAZySztMW9zkg8vnHE8hZtbXKgVOpNEf+FCJTR0fGJMkpgHcX+G1WY="
