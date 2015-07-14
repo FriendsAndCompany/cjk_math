@@ -1,17 +1,20 @@
 language: go
-go:
- - 1.1
- - 1.2
- - 1.3
- - release
- - tip
+  go:
+    - 1.1
+    - 1.2
+    - 1.3
+    - release
+    - tip
 
-install: 
- - go get code.google.com/p/go.tools/cmd/cover
- - go get github.com/mattn/goveralls
+before_install:
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/mattn/goveralls
+  - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
 
 script:
- - go test -v -covermode=count -coverprofile=coverage.out
- - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
-secure: "EyZ7xYRMXp3aeC2izF39PFQtODr32/jyHMA4tTWYacvtx08D0OerBT0fk8TTTLeW8k3uLim0DVh6I5I+6sYXGlM2lGhg2abO/VK2+TumMqDX6jJA2Cg9ps2ppXXME1EuuaU8bZA/XA29JWczoz3COgM/nWl1TKbKZyMorlH2hhioXxEzRBvFrvINQXZdwO7bG2r79QLwHUzTv+fRBXqCyeZaa/xivfPr+KpBjUkr6VRgTexBOXkd70lmvGSR+YW76b5kzRbEV58I/NBJ3jEPp8GSMRZqSgZ1RWqixtCyQxc9/t6Ob7qUFosmzZusZGrJSWoCdZWd1XisStLy6zyLs+vSWdbA+QyRrtr/PuDmWvNNX1kRFwfYrfMFDoI0E0L/rQPs/ABcJUNTiG/jToHgDO+4Z+c3Kj+gyJJIsF7bFg78ltaeggvsizcK3Kb6BdjUcWwO43SJV776vlRIe1tZltAJPXFZ/mG5Dv40JCXQa5Chx6Y9ajxXqQiUZzLAbcjaclwm+Y30Z7JicM/7WgcE/ER/si2QT7C4OXmnFXWt08r10J6i7qBOnqH+Ue/hd5YrDkH/gQVrjEDHJu1JCBPEffRiQy2ZIlLY9Ivg0DFmkzNV4KR2twSPkPAZySztMW9zkg8vnHE8hZtbXKgVOpNEf+FCJTR0fGJMkpgHcX+G1WY="
+env:
+  global:
+    secure: vJYnCrwaF1MFO7mZKDFm1pmjbgTTNudhh7fvdk4Oxnd/yZfs5Ypi12Usixju7rC9GzrV2j+7Pmed0tuyIiLUAJWkatKZBp0u2AtB7QBI1obcKCjj7SMk1uovcgFjnGqvYJA2kseHlHUgqjjbsV/6/fLFglsMBmH+B6l0gbbeuByOsrGEQs+O1Hs25ozqYOcTMZC7+PL6xOWgP3IcjyX8KpEiJE8pkFVdspPhytzeMVqv+yam4ZIzT6MkErpwR8OUFYUjIpYFozZ7vw2zOpXcAsHOLbSqWg6bO1AEpVd2/VRdeNjXUXHXXSPwesSC11XWeLoq3zhgfWmFWpJeQq04HuJca/vykgfCj+soRaUclWNKCK49ryLAugNq7qskkr0yGZa5sDowyjVPbszYJuAcIN+f4FxImFj0a6sOGcasGXWd70pMKxAYrbE+qPQ8ztUGv3EmIlxVNtjLXFRcWLgWt4ssarT0wDhE0qUrEumGa3Wc5BDSxGwraiXA1Bihxsn/KUuVGu/04jBbo/JWCKktE1lvm7uS55U0CNZnbReDN2Uj1l4a4Qtx8BC6OhhfIK+FtM8k0VOYLbyPs9AtS7moEXnf/Rb7IwGQE1w0UjFM/R3AxZosTsQgQAKgqr1bYf4BNelVpQYoGdo4urYwZ9nURrnNCq6/W0M2OQjHxRO62Zg=
